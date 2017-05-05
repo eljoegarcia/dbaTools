@@ -1,0 +1,8 @@
+Line 49: Class MSWinsockLib.Winsock of control Winsockbackup was not a loaded control class.
+Line 70: Class MSComctlLib.ProgressBar of control pb_restore was not a loaded control class.
+Line 52: The property name _ExtentX in Winsockbackup is invalid.
+Line 53: The property name _ExtentY in Winsockbackup is invalid.
+Line 54: The property name _Version in Winsockbackup is invalid.
+Line 76: The property name _ExtentX in pb_restore is invalid.
+Line 77: The property name _ExtentY in pb_restore is invalid.
+Line 78: The property name _Version in pb_restore is invalid.

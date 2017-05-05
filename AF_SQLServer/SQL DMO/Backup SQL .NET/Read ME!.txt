@@ -1,0 +1,34 @@
+SQL Server Database Control 2.0
+
+Hello all,
+
+I upgrade my control from VB 6.0 to VB.NET as many programmers request that from me!! And I'm glad to upgrade it for you all!!!
+
+I hope you like this code, as others programmer like it before in versions before!
+
+This code should work on any PC use VB.NET and installed SQL Server 2000 (any edition or Client Components for SQL Server 2000. 
+
+So the requirments are (References) as COM components:
+ADODB (I used 2.7) (Which come with VB.NET and by many otheres application)
+SQLDMO (Which installed always bt MS SQL Server 2000 or MS SQL Server Client Tools)
+
+Thats all!!!
+
+Please contact me if you have:
+1. Suggestion
+2. Comments
+3. Bug Reprot
+4. Question about this control
+5. Any question for any language in computer
+6. If you face hardware, software (like windows...) or networking.
+7. If you are going to be certified in (MCSE & CCNA)
+8. OR, If you just wanna chat with me! :)
+
+P.S For all: Please, Please, Please Rate my control, Please!!! I need your votes! I really need them!!! Hope you all will vote for my control!!! Please!!!
+
+My contact information:
+
+Issam Hijazi
+
+issam_hijazi@yahoo.com
+hajism87@hotmail.com

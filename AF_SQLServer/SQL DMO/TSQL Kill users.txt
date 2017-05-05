@@ -1,0 +1,37 @@
+Before you can restore all users need to be out of the database.
+This query will have to return 0 (zero) if you would want to restore pubs. select
+count(*) from sysprocesses where dbid = db_id('pubs')
+In SQL 2000 there are ALTER DATABASE statements available to kick users out, in 7.0
+you do not have this help and can only query and use KILL, after which you switch the
+database to single user using sp_dboption 'single user'
+**********************************************************************************************************************
+
+You have to use Dynamic SQL which using KILL with a variable sp_id. Thus you
+have to do:
+EXEC('KILL ' + @spid)
+Another option which is generally suggested in this newsgroup for killing
+all the connections is :
+ALTER DATABASE db SET SINGLE_USER WITH ROLLBACK IMMEDIATE
+-- After killing all you can set it back to multi-user.
+ALTER DATABASE db SET MULTI_USER
+**********************************************************************************************************************
+
+You can execute this to kill all processes to a database:
+alter database yourdatabasename set single_user with rollback immediate
+go alter database yourdatabasename set multi_user with rollback immediate
+go RESTORE DATABASE WebReqs FROM disk = 'c:\inetpub\wwwroot\administration\database\WebReqs.bak'
+**********************************************************************************************************************
+
+You can also disconnect any users who have open connections to the server by using the ROLLBACK IMMEDIATE command. You can't use Enterprise Manager with this command; you must use Query Analyzer to execute the following query:
+**********************************************************************************************************************
+
+ALTER DATABASE Northwind
+SET SINGLE_USER
+WITH ROLLBACK IMMEDIATE
+After you execute this command, SQL Server drops all connections and rolls back their transactions immediately. All users performing a transaction will receive a connection error and will be unable to reconnect to the database.
+You can optionally specify a certain amount of time that SQL Server will give users to complete their transactions before it disconnects them. You use the ROLLBACK AFTER keywords as the following query shows:
+ALTER DATABASE Northwind
+SET SINGLE_USER
+WITH ROLLBACK AFTER 20 SECONDS
+
+

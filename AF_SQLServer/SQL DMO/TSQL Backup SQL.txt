@@ -1,0 +1,46 @@
+The MSDE database engine is 100% compatible with SQL Server and subject to the same license policy of the Jet engine. One of the fundamental differences between MSDE and SQL Server is the lack of any graphical tool for the administration. Many users take advantage of Access 2000 as administrative front-end for the MSDE databases, but how to operate if Access isn't avaible? For example, how to perform a fundamental operation such as the backup without the help of any external tool? In this case you can use the command line utility Osql.exe for executing the following T-SQL script (saved as BackupJob.sql) to create a new backup job and execute it through the sp_start_job stored procedure: 
+
+-- Backup job creation
+USE msdb
+EXEC sp_add_job @job_name = 'BackupJob',
+@enabled = 1,
+@description = 'BackupJob',
+@owner_login_name = 'sa',
+@notify_level_eventlog = 2,
+@notify_level_email = 2,
+@notify_level_netsend =2,
+@notify_level_page = 2
+@notify_email_operator_name = 'myMailAddress'
+go
+-- Data backup
+USE msdb
+EXEC sp_add_jobstep @job_name = 'BackupJob',
+@step_name = 'msdb database backup',
+@subsystem = 'TSQL',
+@command = 'BACKUP DATABASE msdb TO DISK = ''c:\msdb.dat_bak''',
+@on_success_action = 3,
+@retry_attempts = 5,
+@retry_interval = 5
+go
+-- Log file backup
+USE msdb
+EXEC sp_add_jobstep @job_name = 'myTestBackupJob',
+@step_name = 'msdb Log backup',
+@subsystem = 'TSQL',
+@command = 'BACKUP LOG msdb TO DISK = ''c:\msdb.log_bak''',
+@on_success_action = 1,
+@retry_attempts = 5,
+@retry_interval = 5
+go
+-- Server specification
+USE msdb
+EXEC sp_add_jobserver @job_name = 'BackupJob', @server_name = N'(local)'
+
+-- Immediate job execution
+USE msdb
+EXEC sp_start_job @job_name = 'myTestBackupJob'
+
+This script can be launched from the command line As Follows: 
+OSQL -Usa -P -i BackupJob.sql -n
+
+In case you prefer to schedule the backup procedure instead of executing it immediately, it is possible to replace the sp_start_job stored procedure with sp_add_jobschedule, whose syntax is described in the Books Online.
