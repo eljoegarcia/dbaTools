@@ -36,6 +36,8 @@
 						-- Queries related to the clustering key can "seek"
 						-- Queries related to the clustering key can "scan" and void sorts
 
+						--**Like a book Non-Clustered index similar to the index at the back of the book- find the page number of where to find information on aa subject
+
 
 -- Step 1: Open a new query window against the tempdb database
 
@@ -60,7 +62,7 @@ DROP TABLE dbo.PhoneLog
 
 
 -- Step 2: Create a table with a primary key specified (Clustered now so execution plan is Clustered index scan)
-
+			-- can create a non-clsutered if specify ; PRIMARY KEY NON CLUSTERED
 CREATE TABLE dbo.PhoneLog
 ( PhoneLogID int IDENTITY(1,1) PRIMARY KEY,
   LogRecorded datetime2 NOT NULL,
@@ -77,7 +79,7 @@ SELECT * FROM dbo.PhoneLog
 -- (note also the name chosen by SQL Server for the constraint and index)
 
 SELECT * FROM sys.indexes WHERE OBJECT_NAME(object_id) = N'PhoneLog';
-GO
+GO --automatically creted a Primary key based on the clustered index and also listed as constraint
 SELECT * FROM sys.key_constraints WHERE OBJECT_NAME(parent_object_id) = N'PhoneLog';
 GO
 -- Drop table

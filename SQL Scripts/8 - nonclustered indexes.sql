@@ -1,5 +1,37 @@
 -- Demonstration 8 - nonclustered indexes
 
+--USE ADPCt004;
+--GO
+SELECT * FROM sys.indexes --WHERE OBJECT_NAME(object_id) = N'PhoneLog';
+
+--NON-CLUSTERED INDEX (index back of book - pointer - RID on a heap)
+				--  ((index back of book - pointer -clustered index key KEY - then directly to Clustered index to find info we want)
+	--Tables i structured as a heap or a clustered index
+		--Heap = Index ID 0
+		--Clustered Index = Index ID 1
+		--Non-Clustered Index = Index ID 2+
+	--Additional indexes can be created
+		--These are called non clustered indexes (INdex ID 2+)
+		--Separate objects to the table (copied out and stored seperately)
+		--Leaf level contains a pointer to the table where the rest of the columns can be found (index at back of book reference to a page number
+				-- in sql called a Row IDs - row identifier also called a RID -pointing to a specific row on a heap   )
+		--**Like a book Non-Clustered index similar to the index at the back of the book- find the page number of where to find information on aa subject
+		--** so a table is either physically careted as a heap or a clustered index, then we can create a a non-clustered index on the same table
+
+--Covering indexes and INCLUDE 
+	--A covering index is an index that can provide all the column data required to fulfil a query
+		--** Provides better performance as it removes the need to ookup teh data in the tables structure
+		-- prior to SQL server 2005 - had to crete a composite index across multiple columns which was expensive
+		-- Now the INCLUDE (powerful option to remove lookupswithout overhead of having a very wide index key)
+					--clause is used to insert column data into the leaf node of a non-clustered index
+			-- eg select lastname(clustered), first name from customers where lastname= malcolm
+				-- from root index page (non-clustered -> to index pages -> leaf nodes contains all columns in the SELECT clause 
+						--(so no need to look up dat pages in heap or clustered index)
+				-- if we had a index on first and lastname - would be a covering index
+
+
+
+
 
 USE tempdb;
 GO
@@ -32,7 +64,7 @@ GO
 
 CREATE NONCLUSTERED INDEX IX_Book_Publisher
   ON dbo.Book (PublisherID, ReleaseDate DESC)
-  INCLUDE (Title)
+  INCLUDE (Title)--***
   WITH DROP_EXISTING;
 GO
 
@@ -46,12 +78,12 @@ GO
 
 -- Step 7: Use the AdventureWorks Database
 
-USE AdventureWorks;
+USE AdventureWorks2012;
 GO
 
 -- Step 8: Query the sys.index_columns system view
 
-SELECT * FROM sys.index_columns;
+SELECT * FROM sys.index_columns;  --includes is_included_column
 GO
 
 -- Step 9: Note the is_included_column column, the key_ordinal column
@@ -87,4 +119,5 @@ ORDER BY SchemaName, TableOrViewName, i.index_id, ColumnName;
 --          same table that appeared in our list of indexes with 
 --          included columns. Note that by definition, included 
 --          columns only apply to nonclustered indexes.
+
 
