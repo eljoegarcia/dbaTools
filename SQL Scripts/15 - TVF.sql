@@ -1,8 +1,16 @@
 -- Demonstration 15 - Table-Valued Function
 
+--IMPLEMENTING TABLE-VALUED FUNCTIONS
+	--  returns a TABLE data type
+	-- two types;
+		--INLINE TVFs which has a single SELCT statement
+		--Mumtistatement TVFs that will allow to Construct, Populate and reurn a table within the Function
+			--Can Be used to replace views where more complex logic is needed to achieve those results
+
+
 -- Step 1 - Open a new query window against the AdventureWorks database
 
-USE AdventureWorks;
+USE AdventureWorks2014;
 GO
 
 -- Step 2 - create a table-valued function
@@ -29,6 +37,7 @@ GO
 
 -- Step 4 - Now show how CROSS APPLY could be used to call this 
 --          function
+	--** Good for trouble shooting  and for views as well and evaluating some of those dynamic management functions
 
 SELECT c.CustomerID,
              c.AccountNumber,

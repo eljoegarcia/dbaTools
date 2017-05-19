@@ -1,10 +1,48 @@
 -- Demonstration 12 - Stored Procedure Parameters
 
+--USING INPUT PARAMETERS
+	--parameters have @ prefixand datatype specified, and can have a default value
+	--Can be passed either in order or by name but not in combination of the two
+
+		CREATE PROCEDURE sales.OrderDateStatus
+			@DueDate datetime, @Status tinyint = 5
+		AS 
+		SELEcT SalesOrderID, OrderDate,CustomerID
+		FROM Sales.SalesOrderHeader as soh
+		where soh.DueDate =@DueDate and soh.[Status] = @Status;
+		GO
+--USING OUTPUT PARAMETERS
+	--PUTPUT must be specified
+		--when declaring the parameter
+		--When executing the Stored Procedure
+			--when coding you would specify in your ADO.net class you are building..
+			--to connect to the database, whats the direction of th aparameter
+
+				CREATE PROC SALES GetOrderCountByDueDate
+				@Duedate datetime, @orderCount int OUTPUT
+				AS
+					SELECT (OrderCount = COUNT(1) --executing get order count by duedate
+					FROM Sales.SalesorderHeader as soh
+					WHERE soh.Duedate = @Duedate;
+				GO
+
+				DECLARE @DueDate datetime '200507713';
+				DECLARE @ordercount int;
+				EXEC sales.GetOrderCountByDueDate @Duedate,
+												@ordercount OUTPUT; --specify ordercount as output
+				SELECT @OrderCount;
+
 -- Step 1: Open a new query window to the AdventureWorks database
 
-USE AdventureWorks;
+USE AdventureWorks2014;
 GO
 
+--get sp
+
+SELECT SCHEMA_NAME(schema_id) AS SchemaName,
+       name AS ProcedureName
+FROM sys.procedures;
+GO
 -- Step 2: Drop the Production.GetBlueProducts and 
 --         Production.GetBlueProductsAndModels stored procedures
 
