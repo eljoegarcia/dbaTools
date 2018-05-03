@@ -692,27 +692,14 @@ SELECT MAX(Salary) from Employee WHERE Salary NOT IN (select MAX(Salary) from Em
 72. Paging Example :
 In this query we will learn about How to Implement paging in SQL Server.
 
-1
-2
-3
+
 SELECT * FROM (SELECT  ROW_NUMBER() OVER(ORDER BY id) AS RowNum,* FROM Country)as Result
 WHERE RowNum>=20 AND RowNum<=40
 ORDER BY RowNum
 73. Temporary Tables Example :
 In this query we will learn about How to use temporary tables in SQL Server.
 
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
+
 DECLARE @TempTable TABLE
 (       
         Id int primary key,     
@@ -731,12 +718,6 @@ SELECT * FROM @TempTable
 74. Delete duplicate rows :
 In this query we will learn about How to delete duplicate rows in SQL Server.
 
-1
-2
-3
-4
-5
-6
 DELETE FROM TableName
 WHERE ID NOT IN
 (
