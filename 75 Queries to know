@@ -558,60 +558,6 @@ SELECT * FROM TableName WHERE Name LIKE '%TextToSearch%'
 62. Search string in all tables :
 In this query we will learn about How to search string in all tables in SQL Server.
 
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36
-37
-38
-39
-40
-41
-42
-43
-44
-45
-46
-47
-48
-49
-50
-51
-52
-53
-54
 DECLARE @SearchStr nvarchar(100)='textToSearch'
 CREATE TABLE #Results (ColumnName nvarchar(370), ColumnValue nvarchar(3630))
  
@@ -701,8 +647,7 @@ on t1.PrimaryColumn=t2.ForeignKeyColumn
 67. Inner Join :
 In this query we will learn about How to use Inner join in SQL Server.
 
-1
-2
+
 3
 SELECT * FROM Table1 as t1 
 INNER JOIN Table2 as t2
@@ -717,15 +662,6 @@ CROSS JOIN Table2
 69. IF ELSE :
 In this query we will learn about How to use IF ELSE Statements in SQL Server.
 
-1
-2
-3
-4
-5
-6
-7
-8
-9
 DECLARE @ValueToCheck INT;
 SET @ValueToCheck = 14;
  
@@ -738,12 +674,7 @@ SELECT 'Value is greater than 15' As Result
 70. CASE Expression :
 In this query we will learn about How to CASE Expression in SQL Server.
 
-1
-2
-3
-4
-5
-6
+
 SELECT CASE Name
 WHEN 'max' THEN 'Name is max'
 WHEN 'jack' THEN 'Name is max'
