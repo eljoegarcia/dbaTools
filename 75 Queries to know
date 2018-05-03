@@ -171,18 +171,7 @@ ORDER BY
 17. Get Comma Separated List of all columns in table:
 In this query we will learn about How to get Comma Separated List of all columns in table.
 
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
+
 Select TABLE_SCHEMA, TABLE_NAME
 , Stuff(
 (
@@ -248,26 +237,7 @@ DROP COLUMN Email
 24. Check column having NULL values only from a table:
 In this query we will learn about How to check if any column contains only NULL values in SQL Server Table.
 
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
+
 DECLARE @col varchar(255), @cmd varchar(max)
  
 DECLARE getinfo cursor for
@@ -302,18 +272,7 @@ ORDER BY SchemaName, TableName;
 26. Get list of tables without having identity column:
 In this query we will learn about How to get list of tables without having identity column in SQL Server.
 
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
+
 SELECT  
 TABLE_NAME FROM INFORMATION_SCHEMA.TABLES  
 WHERE
@@ -329,18 +288,7 @@ TABLE_TYPE ='BASE TABLE'
 27. Get month names with month numbers:
 In this query we will learn about How to get all month names with month number in SQL Server. I have used this query to bind my dropdownlist with month name and month number.
 
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
+
 ;WITH months(MonthNumber) AS
 (
     SELECT 0
@@ -409,17 +357,7 @@ Note: Here Employee is my table name and CreatedOn is a name of date column used
 In this query we will learn about How to calculate age from birth date in SQL Server.
 
 1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
+
 DECLARE @date datetime, @tmpdate datetime, @years int, @months int, @days int
 SELECT @date = '05/05/1989'
  
@@ -447,9 +385,7 @@ Note: Please take proper backup before running this query. This query will remov
 41. Delete all records from all tables having foreign keys:
 In this query we will learn about How to delete all rows from all tables in SQL Server which have foreign keys.
 
-1
-2
-3
+
 EXEC sp_MSForEachTable 'ALTER TABLE ? NOCHECK CONSTRAINT ALL'
 EXEC sp_MSForEachTable 'DELETE FROM ?'
 EXEC sp_MSForEachTable 'ALTER TABLE ? CHECK CONSTRAINT ALL' 
