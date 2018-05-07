@@ -35,7 +35,6 @@ INSERT INTO TableName (Name,Age) VALUES ('Max',30);
 5. Insert multiple rows in a single query:
 In this Sql query we will learn How to Insert Multiple Rows in a Single SQL Query. This query is very important and generally asked in .Net Interview questions.
 
-1
 2
 INSERT INTO TableName (Name,Age) 
 VALUES ('Max',30),('John',28),('Jack',31);
@@ -138,20 +137,6 @@ SELECT * FROM sys.procedures
 16. Counting rows for all tables at once:
 In this query we will learn about How to fetch the row count for all tables in a SQL SERVER database. This query is very usefull when we want to know how many records are present in tables.
 
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
 SELECT 
 [TableName] = so.name, 
     [RowCount] = MAX(si.rows) 
